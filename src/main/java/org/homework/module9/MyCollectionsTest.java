@@ -3,16 +3,44 @@ package org.homework.module9;
 import org.homework.module9.mycollections.MyArrayList;
 import org.homework.module9.mycollections.MyLinkedList;
 import org.homework.module9.mycollections.MyQueue;
+import org.homework.module9.mycollections.MyStack;
 
 public class MyCollectionsTest {
     public static void main(String[] args) {
         MyArrayList myArrayList = new MyArrayList();
         MyLinkedList linkedList = new MyLinkedList();
         MyQueue myQueue = new MyQueue();
+        MyStack myStack = new MyStack();
 
         //testMyArrayList(myArrayList);
         //testMyLinkedList(linkedList);
         //testMyQueue(myQueue);
+        //testMyStack(myStack);
+    }
+
+    private static void testMyStack(MyStack myStack) {
+        //Заполнение MyStack обьектами с помощью - add()
+        for (int i = 0; i < 5; i++) {
+            myStack.push("MyStack " + i);
+        }
+
+        //Получаем обьекты из MyStack используя метод - peek() и выводим все элементы колекции
+        System.out.println("Last element in collection - " + myStack.peek());
+        System.out.println(myStack + " size is - " + myStack.size());
+
+        //Удаляем элемент колекции вызывая метод - remove() и получаем измененную колекцию
+        myStack.remove(0);
+        System.out.println("Remove successes. Last element in collection - " + myStack.peek());
+        System.out.println(myStack + " size is - " + myStack.size());
+
+        //Получаем и удаляем элемент используя метод poll()
+        System.out.println(myStack.pull());
+        System.out.println(myStack.pull());
+        System.out.println(myStack + " size is - " + myStack.size());
+
+        //Очищаем и выводим колекцию
+        myStack.clear();
+        System.out.println(myStack + " size is - " + myStack.size());
     }
 
     private static void testMyQueue(MyQueue myQueue) {
@@ -22,12 +50,12 @@ public class MyCollectionsTest {
         }
 
         //Получаем обьекты из MyQueue используя метод - peek() и выводим все элементы колекции
-        System.out.println(myQueue.peek());
+        System.out.println("First element in collection - " + myQueue.peek());
         System.out.println(myQueue + " size is - " + myQueue.size());
 
         //Получаем и удаляем элемент колекции вызывая метод - pull() и получаем измененную колекцию
-        System.out.println(myQueue.pull());
-        System.out.println(myQueue.pull());
+        System.out.println("First element in collection now - " + myQueue.pull());
+        System.out.println("First element in collection now - " + myQueue.pull());
         System.out.println(myQueue + " size is - " + myQueue.size());
 
         //Очищаем и выводим колекцию
