@@ -54,4 +54,18 @@ public class MyArrayList {
             array = copy;
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+
+        for (int i = 0; i < size; i++) {
+            sb.append(array[i]);
+            if (size - 1 != i) {
+                sb.append(", ");
+            }
+        }
+
+        return sb.append("]").toString();
+    }
 }

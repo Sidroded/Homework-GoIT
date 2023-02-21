@@ -1,6 +1,6 @@
 package org.homework.module9.mycollections;
 
-public class MyLinkedList {
+public class MyQueue {
     private int index = 0;
     private int size = 0;
     private Node prev;
@@ -38,41 +38,21 @@ public class MyLinkedList {
         firstNode = null;
     }
 
-    public Object get(int index) {
-        Node current = firstNode;
-
-        if (index >= this.index || index < 0) {
-            throw new IndexOutOfBoundsException("Object with index " + index + " doesn't exist.");
-        }
-
-        for (int i = 0; i < index; i++) {
-            current = current.getNext();
-        }
-
-        return current.getObject();
+    public Object peek() {
+        return firstNode.getObject();
     }
 
-    public void remove(int index) {
-        Node removeNode = firstNode;
-        Node prevRemove;
-        Node nextRemove;
-
-        if (index >= this.index || index < 0) {
-            throw new IndexOutOfBoundsException("Object with index " + index + " doesn't exist.");
+    public Object pull() {
+        if (size == 0) {
+            throw new IndexOutOfBoundsException("MyQueue is empty");
         }
 
-        for (int i = 0; i < index; i++) {
-            removeNode = removeNode.getNext();
-        }
+        Node firstNode = this.firstNode;
+        Node nextRemove = firstNode.getNext();
 
-        prevRemove = removeNode.getPrev();
-        nextRemove = removeNode.getNext();
+        this.firstNode = nextRemove;
 
-        if (index == 0) firstNode = nextRemove;
-
-        if (prevRemove != null) prevRemove.setNext(nextRemove);
-
-        if (nextRemove != null) nextRemove.setPrev(prevRemove);
+        if (nextRemove != null) nextRemove.setPrev(null);
 
         this.index--;
         this.size--;
@@ -82,6 +62,8 @@ public class MyLinkedList {
                 nextRemove.setIndex(nextRemove.getIndex() - 1);
             }
         }
+
+        return firstNode.getObject();
     }
 
     @Override
@@ -100,4 +82,3 @@ public class MyLinkedList {
         return sb.append("]").toString();
     }
 }
-
