@@ -1,12 +1,12 @@
 package org.homework.module9.mycollections;
 
-public class MyLinkedList {
+public class MyLinkedList<E> {
     private int size = 0;
     private Node prev;
     private Node next;
     private Node firstNode;
 
-    public void add(Object o) {
+    public void add(E o) {
         Node node;
 
         if (size == 0) {
@@ -35,7 +35,7 @@ public class MyLinkedList {
         firstNode = null;
     }
 
-    public Object get(int index) {
+    public E get(int index) {
         Node current = firstNode;
 
         if (index >= size || index < 0) {
@@ -88,6 +88,40 @@ public class MyLinkedList {
         }
 
         return sb.append("]").toString();
+    }
+
+    private class Node {
+        private final E o;
+        private Node next;
+        private Node prev;
+
+
+        public Node(E o, Node next, Node prev) {
+            this.o = o;
+            this.next = next;
+            this.prev = prev;
+        }
+
+        public E getObject() {
+            return o;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public Node getPrev() {
+            return prev;
+        }
+
+        public void setPrev(Node prev) {
+            this.prev = prev;
+        }
+
     }
 }
 

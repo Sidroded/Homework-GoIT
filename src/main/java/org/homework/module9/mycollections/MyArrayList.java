@@ -2,14 +2,14 @@ package org.homework.module9.mycollections;
 
 import java.util.Arrays;
 
-public class MyArrayList {
+public class MyArrayList<E> {
 
     private Object[] array = {};
     private static final int MIN_CAPACITY = 10;
     private int size = 0;
 
 
-    public void add(Object o) {
+    public void add(E o) {
         checkSize();
         size++;
         array[size - 1] = o;

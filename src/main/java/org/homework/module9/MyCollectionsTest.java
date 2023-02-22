@@ -2,15 +2,13 @@ package org.homework.module9;
 
 import org.homework.module9.mycollections.*;
 
-import java.util.HashMap;
-
 public class MyCollectionsTest {
     public static void main(String[] args) {
-        MyArrayList myArrayList = new MyArrayList();
-        MyLinkedList linkedList = new MyLinkedList();
-        MyQueue myQueue = new MyQueue();
-        MyStack myStack = new MyStack();
-        MyHashMap myHashMap = new MyHashMap();
+        MyArrayList<String> myArrayList = new MyArrayList<>();
+        MyLinkedList<String> linkedList = new MyLinkedList<>();
+        MyQueue<String> myQueue = new MyQueue<>();
+        MyStack<String> myStack = new MyStack<>();
+        MyHashMap<String, Integer> myHashMap = new MyHashMap<>();
 
         //testMyArrayList(myArrayList);
         //testMyLinkedList(linkedList);
@@ -19,7 +17,7 @@ public class MyCollectionsTest {
         //testMyHashMap(myHashMap);
     }
 
-    private static void testMyStack(MyStack myStack) {
+    private static void testMyStack(MyStack<String> myStack) {
         //Заполнение MyStack обьектами с помощью - add()
         for (int i = 0; i < 5; i++) {
             myStack.push("MyStack " + i);
@@ -44,7 +42,7 @@ public class MyCollectionsTest {
         System.out.println(myStack + " size is - " + myStack.size());
     }
 
-    private static void testMyQueue(MyQueue myQueue) {
+    private static void testMyQueue(MyQueue<String> myQueue) {
         //Заполнение MyLinkedList обьектами с помощью - add()
         for (int i = 0; i < 3; i++) {
             myQueue.add("MyQueue " + i);
@@ -64,7 +62,7 @@ public class MyCollectionsTest {
         System.out.println(myQueue + " size is - " + myQueue.size());
     }
 
-    public static void testMyArrayList(MyArrayList myArrayList) {
+    public static void testMyArrayList(MyArrayList<String> myArrayList) {
         //Заполняем масив используя метод - add(), поскольку длина больше минимальной длины массива - массив пересоздается.
         for (int i = 0; i < 11; i++) {
             myArrayList.add("MyArrayList " + i);
@@ -86,7 +84,7 @@ public class MyCollectionsTest {
         System.out.println("Clear is successful " + myArrayList + " size is - " + myArrayList.size());
     }
 
-    public static void testMyLinkedList(MyLinkedList linkedList) {
+    public static void testMyLinkedList(MyLinkedList<String> linkedList) {
         //Заполнение MyLinkedList обьектами с помощью - add()
         for (int i = 0; i < 3; i++) {
             linkedList.add("LinkedList " + i);
@@ -105,15 +103,15 @@ public class MyCollectionsTest {
         System.out.println(linkedList + " size is - " + linkedList.size());
     }
 
-    public static void testMyHashMap(MyHashMap myHashMap) {
+    public static void testMyHashMap(MyHashMap<String, Integer> myHashMap) {
         //Заполнение MyHashMap обьектами с помощью - put() и изменение значения элемента с существующим ключем.
         //Вывод размера с помощью метода - size()
         for (int i = 0; i < 3; i++) {
-            myHashMap.put("MyHashMap key " + i, "value " + i);
+            myHashMap.put("MyHashMap key " + i, i);
         }
 
         System.out.println(myHashMap + " size is - " + myHashMap.size());
-        myHashMap.put("MyHashMap key 1", "new value");
+        myHashMap.put("MyHashMap key 1", 9999999);
         System.out.println(myHashMap + " size is - " + myHashMap.size());
 
         //Получаем элемент из колекции с помощью метода - get()

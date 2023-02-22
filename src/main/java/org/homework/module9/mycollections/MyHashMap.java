@@ -1,11 +1,11 @@
 package org.homework.module9.mycollections;
 
-public class MyHashMap {
+public class MyHashMap<K,V> {
     private int size = 0;
     private NodeHash firstNode;
     private NodeHash next;
 
-    public void put(Object key, Object value) {
+    public void put(K key, V value) {
         NodeHash current = firstNode;
 
         for (int i = 0; i < size; i++) {
@@ -39,12 +39,12 @@ public class MyHashMap {
         firstNode = null;
     }
 
-    public Object get(Object key) {
+    public V get(K key) {
         NodeHash current = firstNode;
 
         for (int i = 0; i < size; i++) {
             if (current.getKey().equals(key)) {
-                return current.getValue();
+                return (V) current.getValue();
             }
             current = current.getNext();
         }
@@ -89,38 +89,38 @@ public class MyHashMap {
 
         return sb.append("]").toString();
     }
+
+    private class NodeHash {
+        private final K key;
+        private V value;
+        private NodeHash next;
+
+        public NodeHash(K key, V value, NodeHash next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        public Object getKey() {
+            return key;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+
+        public NodeHash getNext() {
+            return next;
+        }
+
+        public void setNext(NodeHash next) {
+            this.next = next;
+        }
+    }
 }
 
-class NodeHash {
-    private final Object key;
-    private Object value;
-    private NodeHash next;
 
-    public NodeHash(Object key, Object value, NodeHash next) {
-        this.key = key;
-        this.value = value;
-        this.next = next;
-    }
-
-    public Object getKey() {
-        return key;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public NodeHash getNext() {
-        return next;
-    }
-
-    public void setNext(NodeHash next) {
-        this.next = next;
-    }
-
-
-}
