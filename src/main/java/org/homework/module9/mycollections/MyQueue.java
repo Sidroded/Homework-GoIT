@@ -1,7 +1,6 @@
 package org.homework.module9.mycollections;
 
 public class MyQueue {
-    private int index = 0;
     private int size = 0;
     private Node prev;
     private Node next;
@@ -11,19 +10,18 @@ public class MyQueue {
         Node node;
 
         if (size == 0) {
-            node = new Node(o, null, null, index);
+            node = new Node(o, null, null);
             firstNode = node;
             next = node;
             prev = node;
         } else {
-            node = new Node(o, null, prev, index);
+            node = new Node(o, null, prev);
             prev = node;
             next.setNext(node);
             next = node;
         }
 
         size++;
-        index++;
     }
 
     public int size() {
@@ -31,7 +29,6 @@ public class MyQueue {
     }
 
     public void clear() {
-        index = 0;
         size = 0;
         prev = null;
         next = null;
@@ -54,14 +51,7 @@ public class MyQueue {
 
         if (nextRemove != null) nextRemove.setPrev(null);
 
-        this.index--;
         this.size--;
-
-        if (nextRemove != null) {
-            for (int i = nextRemove.getIndex(); i < this.index; i++) {
-                nextRemove.setIndex(nextRemove.getIndex() - 1);
-            }
-        }
 
         return firstNode.getObject();
     }
@@ -71,9 +61,9 @@ public class MyQueue {
         StringBuilder sb = new StringBuilder("[");
         Node current = firstNode;
 
-        for (int i = 0; i < this.index; i++) {
+        for (int i = 0; i < size; i++) {
             sb.append(current.getObject().toString());
-            if (this.index - 1 != i) {
+            if (size - 1 != i) {
                 sb.append(", ");
             }
             current = current.getNext();

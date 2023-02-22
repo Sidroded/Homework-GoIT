@@ -1,7 +1,6 @@
 package org.homework.module9.mycollections;
 
 public class MyStack {
-    private int index = 0;
     private int size = 0;
     private Node prev;
     private Node next;
@@ -12,12 +11,12 @@ public class MyStack {
         Node node;
 
         if (size == 0) {
-            node = new Node(o, null, null, index);
+            node = new Node(o, null, null);
             firstNode = node;
             next = node;
             prev = node;
         } else {
-            node = new Node(o, null, prev, index);
+            node = new Node(o, null, prev);
             prev = node;
             next.setNext(node);
             next = node;
@@ -25,7 +24,6 @@ public class MyStack {
         }
 
         size++;
-        index++;
     }
 
     public int size() {
@@ -33,7 +31,6 @@ public class MyStack {
     }
 
     public void clear() {
-        index = 0;
         size = 0;
         prev = null;
         next = null;
@@ -50,7 +47,6 @@ public class MyStack {
         this.lastNode = prevLast;
         if (prevLast != null) prevLast.setNext(null);
         size--;
-        index--;
         return lastNode.getObject();
     }
 
@@ -59,7 +55,7 @@ public class MyStack {
         Node prevRemove;
         Node nextRemove;
 
-        if (index >= this.index || index < 0) {
+        if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Object with index " + index + " doesn't exist.");
         }
 
@@ -78,14 +74,7 @@ public class MyStack {
 
         if (nextRemove != null) nextRemove.setPrev(prevRemove);
 
-        this.index--;
         this.size--;
-
-        if (nextRemove != null) {
-            for (int i = nextRemove.getIndex(); i < this.index; i++) {
-                nextRemove.setIndex(nextRemove.getIndex() - 1);
-            }
-        }
     }
 
     @Override
@@ -93,9 +82,9 @@ public class MyStack {
         StringBuilder sb = new StringBuilder("[");
         Node current = firstNode;
 
-        for (int i = 0; i < this.index; i++) {
+        for (int i = 0; i < size; i++) {
             sb.append(current.getObject().toString());
-            if (this.index - 1 != i) {
+            if (size - 1 != i) {
                 sb.append(", ");
             }
             current = current.getNext();

@@ -12,10 +12,10 @@ public class MyCollectionsTest {
         MyQueue myQueue = new MyQueue();
         MyStack myStack = new MyStack();
 
-        //testMyArrayList(myArrayList);
-        //testMyLinkedList(linkedList);
-        //testMyQueue(myQueue);
-        //testMyStack(myStack);
+        testMyArrayList(myArrayList);
+        testMyLinkedList(linkedList);
+        testMyQueue(myQueue);
+        testMyStack(myStack);
     }
 
     private static void testMyStack(MyStack myStack) {

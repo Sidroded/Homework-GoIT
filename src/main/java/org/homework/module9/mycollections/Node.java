@@ -5,13 +5,12 @@ public class Node {
     private final Object o;
     private Node next;
     private Node prev;
-    private int index;
 
-    public Node(Object o, Node next, Node prev, int index) {
+
+    public Node(Object o, Node next, Node prev) {
         this.o = o;
         this.next = next;
         this.prev = prev;
-        this.index = index;
     }
 
     public Object getObject() {
@@ -34,11 +33,4 @@ public class Node {
         this.prev = prev;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 }
