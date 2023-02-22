@@ -72,23 +72,18 @@ public class MyCollectionsTest {
 
         //Выводим его размер вызывая метод - size()
         System.out.println(myArrayList + " size is " + myArrayList.size());
-        System.out.println();
 
         //Выводим весь масив используя метод - get()
-        for (int i = 0; i < 11; i++) {
-            System.out.println(myArrayList.get(i));
-        }
-        System.out.println();
+        System.out.println(myArrayList.get(0) + " " + myArrayList.get(10));
 
         //Удаление и смещение массива вызывая метод - remove()
-        System.out.println("Now we are going to remove [" + myArrayList.get(0) + "] size is " + myArrayList.size());
+        System.out.println("Now we are going to remove [" + myArrayList.get(0) + "] size is - " + myArrayList.size());
         myArrayList.remove(0);
-        System.out.println(myArrayList + " remove is successful");
-        System.out.println();
+        System.out.println(myArrayList + " remove is successful size is - " + myArrayList.size());
 
         //Очищаем MyArrayList используя метод - clear()
         myArrayList.clear();
-        System.out.println(myArrayList.size());
+        System.out.println("Clear is successful " + myArrayList + " size is - " + myArrayList.size());
     }
 
     public static void testMyLinkedList(MyLinkedList linkedList) {
@@ -97,9 +92,9 @@ public class MyCollectionsTest {
             linkedList.add("LinkedList " + i);
         }
 
-        //Получаем обьекты из MyLinkedList используя метод - get() и выводим все элементы колекции
-        System.out.println(linkedList.get(2));
+        //Получаем обьекты из MyLinkedList используя метод - get() и выводим все элементы колекции и ее размер с помощью метода - size()
         System.out.println(linkedList + " size is - " + linkedList.size());
+        System.out.println(linkedList.get(2));
 
         //Удаление и смещение массива вызывая метод - remove() и получаем измененную колекцию
         linkedList.remove(0);
