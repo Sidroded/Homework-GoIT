@@ -44,7 +44,7 @@ public class MyHashMap<K,V> {
 
         for (int i = 0; i < size; i++) {
             if (current.getKey().equals(key)) {
-                return (V) current.getValue();
+                return current.getValue();
             }
             current = current.getNext();
         }
