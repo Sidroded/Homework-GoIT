@@ -52,7 +52,7 @@ public class MyHashMap<K,V> {
         return null;
     }
 
-    public void remove(Object key) {
+    public void remove(K key) {
         if (firstNode.getKey().equals(key)) {
             firstNode = firstNode.getNext();
             size--;
@@ -101,11 +101,11 @@ public class MyHashMap<K,V> {
             this.next = next;
         }
 
-        public Object getKey() {
+        public K getKey() {
             return key;
         }
 
-        public Object getValue() {
+        public V getValue() {
             return value;
         }
 

@@ -1,5 +1,7 @@
 package org.homework.module9.mycollections;
 
+import java.util.Objects;
+
 public class MyStack<E> {
     private int size = 0;
     private Node prev;
@@ -37,11 +39,11 @@ public class MyStack<E> {
         firstNode = null;
     }
 
-    public Object peek() {
+    public E peek() {
         return lastNode.getObject();
     }
 
-    public Object pull() {
+    public E pull() {
         Node lastNode = this.lastNode;
         Node prevLast = this.lastNode.getPrev();
         this.lastNode = prevLast;
@@ -55,9 +57,7 @@ public class MyStack<E> {
         Node prevRemove;
         Node nextRemove;
 
-        if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Object with index " + index + " doesn't exist.");
-        }
+        Objects.checkIndex(index, size);
 
         for (int i = 0; i < index; i++) {
             removeNode = removeNode.getNext();

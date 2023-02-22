@@ -1,5 +1,7 @@
 package org.homework.module9.mycollections;
 
+import java.util.Objects;
+
 public class MyLinkedList<E> {
     private int size = 0;
     private Node prev;
@@ -38,9 +40,7 @@ public class MyLinkedList<E> {
     public E get(int index) {
         Node current = firstNode;
 
-        if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Object with index " + index + " doesn't exist.");
-        }
+        Objects.checkIndex(index, size);
 
         for (int i = 0; i < index; i++) {
             current = current.getNext();
@@ -54,9 +54,7 @@ public class MyLinkedList<E> {
         Node prevRemove;
         Node nextRemove;
 
-        if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Object with index " + index + " doesn't exist.");
-        }
+        Objects.checkIndex(index, size);
 
         for (int i = 0; i < index; i++) {
             removeNode = removeNode.getNext();

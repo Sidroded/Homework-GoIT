@@ -1,6 +1,7 @@
 package org.homework.module9.mycollections;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MyArrayList<E> {
 
@@ -10,16 +11,16 @@ public class MyArrayList<E> {
 
 
     public void add(E o) {
-        checkSize();
+        if (array.length == size) {
+            array = Arrays.copyOf(array, array.length + MIN_CAPACITY);
+        }
+        array[size] = o;
         size++;
-        array[size - 1] = o;
     }
 
     public Object get(int index) {
-        if (index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        return array[index];
+        Objects.checkIndex(index, size);
+        return (E) array[index];
     }
 
     public int size() {
@@ -48,12 +49,6 @@ public class MyArrayList<E> {
         size = 0;
     }
 
-    private void checkSize() {
-        if (array.length == size) {
-            Object[] copy = Arrays.copyOf(array, array.length + MIN_CAPACITY);
-            array = copy;
-        }
-    }
 
     @Override
     public String toString() {

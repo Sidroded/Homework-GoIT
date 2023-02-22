@@ -10,11 +10,11 @@ public class MyCollectionsTest {
         MyStack<String> myStack = new MyStack<>();
         MyHashMap<String, Integer> myHashMap = new MyHashMap<>();
 
-        //testMyArrayList(myArrayList);
-        //testMyLinkedList(linkedList);
-        //testMyQueue(myQueue);
-        //testMyStack(myStack);
-        //testMyHashMap(myHashMap);
+        testMyArrayList(myArrayList);
+        testMyLinkedList(linkedList);
+        testMyQueue(myQueue);
+        testMyStack(myStack);
+        testMyHashMap(myHashMap);
     }
 
     private static void testMyStack(MyStack<String> myStack) {

@@ -35,11 +35,11 @@ public class MyQueue<E> {
         firstNode = null;
     }
 
-    public Object peek() {
+    public E peek() {
         return firstNode.getObject();
     }
 
-    public Object pull() {
+    public E pull() {
         if (size == 0) {
             throw new IndexOutOfBoundsException("MyQueue is empty");
         }
