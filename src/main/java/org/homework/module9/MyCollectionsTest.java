@@ -1,9 +1,8 @@
 package org.homework.module9;
 
-import org.homework.module9.mycollections.MyArrayList;
-import org.homework.module9.mycollections.MyLinkedList;
-import org.homework.module9.mycollections.MyQueue;
-import org.homework.module9.mycollections.MyStack;
+import org.homework.module9.mycollections.*;
+
+import java.util.HashMap;
 
 public class MyCollectionsTest {
     public static void main(String[] args) {
@@ -11,11 +10,13 @@ public class MyCollectionsTest {
         MyLinkedList linkedList = new MyLinkedList();
         MyQueue myQueue = new MyQueue();
         MyStack myStack = new MyStack();
+        MyHashMap myHashMap = new MyHashMap();
 
-        testMyArrayList(myArrayList);
-        testMyLinkedList(linkedList);
-        testMyQueue(myQueue);
-        testMyStack(myStack);
+        //testMyArrayList(myArrayList);
+        //testMyLinkedList(linkedList);
+        //testMyQueue(myQueue);
+        //testMyStack(myStack);
+        //testMyHashMap(myHashMap);
     }
 
     private static void testMyStack(MyStack myStack) {
@@ -107,5 +108,29 @@ public class MyCollectionsTest {
         //Очищаем и выводим колекцию
         linkedList.clear();
         System.out.println(linkedList + " size is - " + linkedList.size());
+    }
+
+    public static void testMyHashMap(MyHashMap myHashMap) {
+        //Заполнение MyHashMap обьектами с помощью - put() и изменение значения элемента с существующим ключем.
+        //Вывод размера с помощью метода - size()
+        for (int i = 0; i < 3; i++) {
+            myHashMap.put("MyHashMap key " + i, "value " + i);
+        }
+
+        System.out.println(myHashMap + " size is - " + myHashMap.size());
+        myHashMap.put("MyHashMap key 1", "new value");
+        System.out.println(myHashMap + " size is - " + myHashMap.size());
+
+        //Получаем элемент из колекции с помощью метода - get()
+        System.out.println("Value of object with key \"MyHashMap key 1\" - " + myHashMap.get("MyHashMap key 1"));
+
+        //Удаление элемента по ключу используя метод - remove()
+        System.out.println("Now we are going to remove \"MyHashMap key 2\"");
+        myHashMap.remove("MyHashMap key 2");
+        System.out.println("Removed is successful - " + myHashMap + " size is - " + myHashMap.size());
+
+        //Очищаем колекцию используя метод - clear()
+        myHashMap.clear();
+        System.out.println("Collection is cleared - " + myHashMap + " size is " + myHashMap.size());
     }
 }
