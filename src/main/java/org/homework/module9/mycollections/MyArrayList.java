@@ -1,7 +1,6 @@
 package org.homework.module9.mycollections;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class MyArrayList<E> {
 
@@ -18,8 +17,8 @@ public class MyArrayList<E> {
         size++;
     }
 
-    public Object get(int index) {
-        Objects.checkIndex(index, size);
+    public E get(int index) {
+        if (index > size - 1 || index < 0) return null;
         return (E) array[index];
     }
 
@@ -31,12 +30,8 @@ public class MyArrayList<E> {
         for (int i = 0; i < array.length-1; i++) {
             if(array[i] == array[index]){
                 Object[] newArr = new Object[array.length - 1];
-                for(int y = 0; y < i; y++){
-                    newArr[y] = array[y];
-                }
-                for(int j = i; j < array.length - 1; j++){
-                    newArr[j] = array[j+1];
-                }
+                System.arraycopy(array, 0, newArr, 0, i);
+                if (array.length - 1 - i >= 0) System.arraycopy(array, i + 1, newArr, i, array.length - 1 - i);
                 array = newArr;
                 size--;
                 break;
