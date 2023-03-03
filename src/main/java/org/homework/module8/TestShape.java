@@ -15,7 +15,7 @@ public class TestShape {
         Shape circle = new Circle("TextCircle", Color.RED, 3);
         Shape rectangle = new Rectangle("TestRectangle", Color.GREEN, 2,4);
         Shape rhombus = new Rhombus("TextRhombus", Color.WHITE, 2,5);
-        EquilateralTriangle triangle = new EquilateralTriangle("TextTriangle", Color.PINK, 4);
+        Shape triangle = new EquilateralTriangle("TextTriangle", Color.PINK, 4);
 
         shapes.add(square);
         shapes.add(circle);

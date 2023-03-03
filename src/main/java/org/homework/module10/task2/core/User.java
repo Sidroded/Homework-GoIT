@@ -1,4 +1,4 @@
-package org.homework.module10.task2.user;
+package org.homework.module10.task2.core;
 
 public class User {
     private final String name;

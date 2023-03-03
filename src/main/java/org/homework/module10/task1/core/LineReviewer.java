@@ -15,7 +15,7 @@ public class LineReviewer {
     public LineReviewer(BufferedReader reader, String... regex) throws IOException {
         this.reader = reader;
         this.regex = regex;
-        fillAllDataArr();
+        fillInputDataArr();
         review();
     }
 
@@ -23,7 +23,7 @@ public class LineReviewer {
         return result.toString();
     }
 
-    private void fillAllDataArr() throws IOException {
+    private void fillInputDataArr() throws IOException {
         while (reader.ready()) {
             inputDataArr.add(reader.readLine());
         }
