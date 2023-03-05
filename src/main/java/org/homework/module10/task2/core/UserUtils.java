@@ -18,11 +18,15 @@ public class UserUtils {
                 if (!data.equals("name age")) {
                     String[] dataArr = data.split(" ");
 
+                    if (dataArr.length != 2 || dataArr[0].matches(".*\\d+.*") || dataArr[1].matches("\\d+")) {
+                        throw new IllegalArgumentException();
+                    }
+
                     User user = new User(dataArr[0], Integer.parseInt(dataArr[1]));
                     users.add(user);
                 }
             }
-        } catch (IllegalFormatException e) {
+        } catch (Exception e) {
             System.err.println("Incorrect data");
             e.printStackTrace();
         }
