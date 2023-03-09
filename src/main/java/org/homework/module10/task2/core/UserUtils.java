@@ -19,7 +19,7 @@ public class UserUtils {
                     String[] dataArr = data.split(" ");
 
                     if (dataArr.length != 2 || dataArr[0].matches(".*\\d+.*") || dataArr[1].matches("\\d+")) {
-                        throw new IllegalArgumentException();
+                        continue;
                     }
 
                     User user = new User(dataArr[0], Integer.parseInt(dataArr[1]));
