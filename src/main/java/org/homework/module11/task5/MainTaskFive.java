@@ -1,6 +1,7 @@
 package org.homework.module11.task5;
 
 import java.util.Iterator;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class MainTaskFive {
@@ -19,12 +20,12 @@ public class MainTaskFive {
         Iterator<T> firstIterator = first.iterator();
         Iterator<T> secondIterator = second.iterator();
 
-        Stream<T> zipped = Stream.empty();
-
-        while (firstIterator.hasNext() && secondIterator.hasNext()) {
-            zipped = Stream.concat(zipped, Stream.of(firstIterator.next(), secondIterator.next()));
-        }
-
-        return zipped;
+        return Stream.generate(() -> {
+            if (firstIterator.hasNext() && secondIterator.hasNext()) {
+                return Stream.of(firstIterator.next(), secondIterator.next());
+            } else {
+                return null;
+            }
+        }).flatMap(Function.identity());
     }
 }
