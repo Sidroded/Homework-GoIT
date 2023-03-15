@@ -7,9 +7,7 @@ public class MainTaskTwo {
     public static volatile int count = 1;
     public static int num;
     public static final Object MONITOR = new Object();
-    public static BlockingQueue<String> fizzQueue = new LinkedBlockingQueue<>();
-    public static BlockingQueue<String> buzzQueue = new LinkedBlockingQueue<>();
-    public static BlockingQueue<String> fizzBuzzQueue  = new LinkedBlockingQueue<>();
+    public static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -21,7 +19,7 @@ public class MainTaskTwo {
                     if (isCountGreaterThanNum()) {
                         return;
                     } else if (count % 3 == 0 && count % 5 != 0) {
-                        fizzQueue.add("fizz");
+                        queue.add("fizz");
                         count++;
                     }
                 }
@@ -34,43 +32,38 @@ public class MainTaskTwo {
                     if (isCountGreaterThanNum()) {
                         return;
                     } else if (count % 3 != 0 && count % 5 == 0) {
-                        buzzQueue.add("buzz");
+                        queue.add("buzz");
                         count++;
                     }
                 }
             }
         });
         Thread c = new Thread(() -> {
-            while (true){
+            while (true) {
                 synchronized (MONITOR) {
                     if (isCountGreaterThanNum()) {
                         return;
                     } else if (count % 3 == 0 && count % 5 == 0) {
-                        fizzBuzzQueue.add("fizzbuzz");
+                        queue.add("fizzbuzz");
                         count++;
                     }
                 }
             }
         });
         Thread d = new Thread(() -> {
-            StringBuilder stringBuffer = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            synchronized (MONITOR) {
-                while (true) {
+            while (true) {
+                synchronized (MONITOR) {
                     if (isCountGreaterThanNum()) {
-                        System.out.println(stringBuffer);
+                        for (String str : queue) {
+                            sb.append(str).append(", ");
+                        }
+
+                        System.out.println(sb);
                         return;
-                    } else if (!fizzQueue.isEmpty()) {
-                        stringBuffer.append("fizz, ");
-                        MainTaskTwo.fizzQueue.remove();
-                    } else if (!MainTaskTwo.buzzQueue.isEmpty()) {
-                        stringBuffer.append("buzz, ");
-                        MainTaskTwo.buzzQueue.remove();
-                    } else if (!MainTaskTwo.fizzBuzzQueue.isEmpty()) {
-                        stringBuffer.append("fizzbuzz, ");
-                        MainTaskTwo.fizzBuzzQueue.remove();
                     } else {
-                        stringBuffer.append(MainTaskTwo.count).append(", ");
+                        queue.add(String.valueOf(queue));
                         MainTaskTwo.count++;
                     }
                 }
