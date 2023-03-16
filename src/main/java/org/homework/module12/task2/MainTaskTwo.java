@@ -50,7 +50,9 @@ public class MainTaskTwo {
     public static void fizz() throws InterruptedException {
         while (true) {
             synchronized (queue) {
-                if (count.get() % 3 == 0 && count.get() % 5 != 0) {
+                if (isCountGreaterThanNum()) {
+                    return;
+                } else if (count.get() % 3 == 0 && count.get() % 5 != 0) {
                     queue.add("fizz");
                     count.incrementAndGet();
                     queue.notifyAll();
@@ -69,7 +71,9 @@ public class MainTaskTwo {
     public static void buzz() throws InterruptedException {
         while (true) {
             synchronized (queue) {
-                if (count.get() % 3 != 0 && count.get() % 5 == 0) {
+                if (isCountGreaterThanNum()) {
+                    return;
+                } else if (count.get() % 3 != 0 && count.get() % 5 == 0) {
                     queue.add("buzz");
                     count.incrementAndGet();
                     queue.notifyAll();
@@ -88,7 +92,9 @@ public class MainTaskTwo {
     public static void fizzbuzz() throws InterruptedException {
         while (true) {
             synchronized (queue) {
-                if (count.get() % 3 == 0 && count.get() % 5 == 0) {
+                if (isCountGreaterThanNum()) {
+                    return;
+                } else if (count.get() % 3 == 0 && count.get() % 5 == 0) {
                     queue.add("fizzbuzz");
                     count.incrementAndGet();
                     queue.notifyAll();
