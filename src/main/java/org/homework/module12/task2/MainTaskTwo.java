@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.stream.Collectors;
 
 public class MainTaskTwo {
     public static volatile int count = 1;
@@ -72,7 +71,7 @@ public class MainTaskTwo {
 
             while (true) {
                 synchronized (MONITOR) {
-                    if (count == num) {
+                    if (isCountGreaterThanNum()) {
                         System.out.println(String.join(", ", list));
                         return;
                     } else if (!queue.isEmpty()) {
@@ -108,6 +107,6 @@ public class MainTaskTwo {
 
 
     public static synchronized boolean isCountGreaterThanNum() {
-        return count >= num;
+        return count > num;
     }
 }
