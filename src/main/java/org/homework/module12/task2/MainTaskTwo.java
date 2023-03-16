@@ -7,9 +7,7 @@ public class MainTaskTwo {
     public static volatile int count = 1;
     public static int num;
     public static final Object MONITOR = new Object();
-    public static BlockingQueue<String> fizzQueue = new LinkedBlockingQueue<>();
-    public static BlockingQueue<String> buzzQueue = new LinkedBlockingQueue<>();
-    public static BlockingQueue<String> fizzBuzzQueue  = new LinkedBlockingQueue<>();
+    public static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -21,7 +19,11 @@ public class MainTaskTwo {
                     if (isCountGreaterThanNum()) {
                         return;
                     } else if (count % 3 == 0 && count % 5 != 0) {
-                        fizzQueue.add("fizz");
+                        try {
+                            queue.put("fizz");
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         count++;
                     }
                 }
@@ -34,44 +36,57 @@ public class MainTaskTwo {
                     if (isCountGreaterThanNum()) {
                         return;
                     } else if (count % 3 != 0 && count % 5 == 0) {
-                        buzzQueue.add("buzz");
+                        try {
+                            queue.put("buzz");
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         count++;
                     }
                 }
             }
         });
+
         Thread c = new Thread(() -> {
-            while (true){
+            while (true) {
                 synchronized (MONITOR) {
                     if (isCountGreaterThanNum()) {
                         return;
                     } else if (count % 3 == 0 && count % 5 == 0) {
-                        fizzBuzzQueue.add("fizzbuzz");
+                        try {
+                            queue.put("fizzbuzz");
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         count++;
                     }
                 }
             }
         });
+
         Thread d = new Thread(() -> {
             StringBuilder stringBuffer = new StringBuilder();
 
-            synchronized (MONITOR) {
-                while (true) {
-                    if (isCountGreaterThanNum()) {
+            while (true) {
+                synchronized (MONITOR) {
+                    if (count == num) {
                         System.out.println(stringBuffer);
                         return;
-                    } else if (!fizzQueue.isEmpty()) {
-                        stringBuffer.append("fizz, ");
-                        MainTaskTwo.fizzQueue.remove();
-                    } else if (!MainTaskTwo.buzzQueue.isEmpty()) {
-                        stringBuffer.append("buzz, ");
-                        MainTaskTwo.buzzQueue.remove();
-                    } else if (!MainTaskTwo.fizzBuzzQueue.isEmpty()) {
-                        stringBuffer.append("fizzbuzz, ");
-                        MainTaskTwo.fizzBuzzQueue.remove();
+                    } else if (!queue.isEmpty()) {
+                        try {
+                            stringBuffer.append(queue.take()).append(", ");
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     } else {
-                        stringBuffer.append(MainTaskTwo.count).append(", ");
-                        MainTaskTwo.count++;
+                        synchronized (MONITOR) {
+                            try {
+                                queue.put(String.valueOf(count));
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            count++;
+                        }
                     }
                 }
             }
@@ -90,6 +105,6 @@ public class MainTaskTwo {
 
 
     public static synchronized boolean isCountGreaterThanNum() {
-        return count > num;
+        return count >= num;
     }
 }
