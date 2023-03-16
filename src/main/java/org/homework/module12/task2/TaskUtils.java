@@ -1,6 +1,7 @@
 package org.homework.module12.task2;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TaskUtils {
 
@@ -16,7 +17,7 @@ public class TaskUtils {
             scanner.next();
         }
 
-        return scanner.nextInt();
+        return scanner.nextInt() + 1;
     }
 
 }
