@@ -1,7 +1,10 @@
 package org.homework.module12.task2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.stream.Collectors;
 
 public class MainTaskTwo {
     public static volatile int count = 1;
@@ -65,16 +68,16 @@ public class MainTaskTwo {
         });
 
         Thread d = new Thread(() -> {
-            StringBuilder stringBuffer = new StringBuilder();
+            List<String> list = new ArrayList<>();
 
             while (true) {
                 synchronized (MONITOR) {
                     if (count == num) {
-                        System.out.println(stringBuffer);
+                        System.out.println(String.join(", ", list));
                         return;
                     } else if (!queue.isEmpty()) {
                         try {
-                            stringBuffer.append(queue.take()).append(", ");
+                            list.add(queue.take());
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
