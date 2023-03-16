@@ -1,6 +1,7 @@
 package org.homework.module12.task2;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TaskUtils {
     private static final String START_INFO = "Для того щоб почати роботу із программою" +
@@ -15,6 +16,6 @@ public class TaskUtils {
             scanner.next();
         }
 
-        return scanner.nextInt();
+        return scanner.nextInt() + 1;
     }
 }

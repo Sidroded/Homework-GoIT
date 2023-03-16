@@ -4,109 +4,139 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainTaskTwo {
-    public static volatile int count = 1;
+    public static AtomicInteger count = new AtomicInteger(1);
     public static int num;
-    public static final Object MONITOR = new Object();
-    public static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+    public static final BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
 
     public static void main(String[] args) throws InterruptedException {
         num = TaskUtils.getNum();
 
-        Thread a = new Thread(() -> {
-            while (true) {
-                synchronized (MONITOR) {
-                    if (isCountGreaterThanNum()) {
-                        return;
-                    } else if (count % 3 == 0 && count % 5 != 0) {
-                        try {
-                            queue.put("fizz");
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        count++;
+        new Thread(() -> {
+            try {
+                fizz();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                buzz();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                fizzbuzz();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                number();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public static void fizz() throws InterruptedException {
+        while (true) {
+            synchronized (queue) {
+                if (count.get() % 3 == 0 && count.get() % 5 != 0) {
+                    queue.add("fizz");
+                    count.incrementAndGet();
+                    queue.notifyAll();
+                } else {
+                    try {
+                        queue.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
-        });
+            Thread.sleep(10);
+        }
+    }
 
-        Thread b = new Thread(() -> {
-            while (true) {
-                synchronized (MONITOR) {
-                    if (isCountGreaterThanNum()) {
-                        return;
-                    } else if (count % 3 != 0 && count % 5 == 0) {
-                        try {
-                            queue.put("buzz");
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        count++;
+    public static void buzz() throws InterruptedException {
+        while (true) {
+            synchronized (queue) {
+                if (isCountGreaterThanNum()) {
+                    return;
+                } else if (count.get() % 3 != 0 && count.get() % 5 == 0) {
+                    queue.add("buzz");
+                    count.incrementAndGet();
+                    queue.notifyAll();
+                } else {
+                    try {
+                        queue.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
-        });
+            Thread.sleep(10);
+        }
+    }
 
-        Thread c = new Thread(() -> {
-            while (true) {
-                synchronized (MONITOR) {
-                    if (isCountGreaterThanNum()) {
-                        return;
-                    } else if (count % 3 == 0 && count % 5 == 0) {
-                        try {
-                            queue.put("fizzbuzz");
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        count++;
+    public static void fizzbuzz() throws InterruptedException {
+        while (true) {
+            synchronized (queue) {
+                if (isCountGreaterThanNum()) {
+                    return;
+                } else if (count.get() % 3 == 0 && count.get() % 5 == 0) {
+                    queue.add("fizzbuzz");
+                    count.incrementAndGet();
+                    queue.notifyAll();
+                } else {
+                    try {
+                        queue.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
-        });
+            Thread.sleep(10);
+        }
+    }
 
-        Thread d = new Thread(() -> {
-            List<String> list = new ArrayList<>();
+    public static void number() throws InterruptedException {
+        List<String> list = new ArrayList<>();
 
-            while (true) {
-                synchronized (MONITOR) {
-                    if (isCountGreaterThanNum()) {
-                        System.out.println(String.join(", ", list));
-                        return;
-                    } else if (!queue.isEmpty()) {
-                        try {
-                            list.add(queue.take());
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else {
-                        synchronized (MONITOR) {
-                            try {
-                                queue.put(String.valueOf(count));
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                            count++;
-                        }
+        while (true) {
+            synchronized (queue) {
+                if (isCountGreaterThanNum()) {
+                    System.out.println(String.join(", ", list));
+                    return;
+                } else if (!queue.isEmpty()) {
+                    try {
+                        list.add(queue.take());
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    synchronized (queue) {
+                        queue.add(String.valueOf(count));
+                        count.incrementAndGet();
+                        queue.notifyAll();
                     }
                 }
             }
-        });
-
-        a.start();
-        b.start();
-        c.start();
-        d.start();
-
-        a.join();
-        b.join();
-        c.join();
-        d.join();
+            Thread.sleep(10);
+        }
     }
 
 
     public static synchronized boolean isCountGreaterThanNum() {
-        return count > num;
+        return count.get() > num;
     }
 }
