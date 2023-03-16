@@ -11,9 +11,8 @@ public class MainTaskTwo {
     public static int num;
     public static final BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
-
-    public static void main(String[] args) throws InterruptedException {
-        num = TaskUtils.getNum();
+    public static void main(String[] args) {
+        int n = TaskUtils.getNum();
 
         new Thread(() -> {
             try {
@@ -138,5 +137,5 @@ public class MainTaskTwo {
 
     public static synchronized boolean isCountGreaterThanNum() {
         return count.get() > num;
-    }
+      }
 }

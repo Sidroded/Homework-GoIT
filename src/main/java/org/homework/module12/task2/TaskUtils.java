@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TaskUtils {
+
     private static final String START_INFO = "Для того щоб почати роботу із программою" +
             " введіть число включно до якого будуть виконуватись вимоги до завдання.";
 
@@ -18,4 +19,5 @@ public class TaskUtils {
 
         return scanner.nextInt() + 1;
     }
+
 }
