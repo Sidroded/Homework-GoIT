@@ -12,7 +12,7 @@ public class MainTaskTwo {
     public static final BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
     public static void main(String[] args) {
-        int n = TaskUtils.getNum();
+        num = TaskUtils.getNum();
 
         new Thread(() -> {
             try {
@@ -137,5 +137,5 @@ public class MainTaskTwo {
 
     public static synchronized boolean isCountGreaterThanNum() {
         return count.get() > num;
-      }
+    }
 }
