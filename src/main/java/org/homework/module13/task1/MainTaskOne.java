@@ -1,34 +1,31 @@
 package org.homework.module13.task1;
 
-import org.json.simple.parser.ParseException;
+import org.homework.module13.model.user.User;
+import org.homework.module13.utils.HTTPUtils;
+import org.homework.module13.utils.TaskUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class MainTaskOne {
-    private static final String URL_USERS = " https://jsonplaceholder.typicode.com/users";
-    public static void main(String[] args) throws IOException, ParseException {
-        URL url = new URL(URL_USERS);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
+    public static void main(String[] args) throws IOException, InterruptedException {
+        User defaultUser = TaskUtils.getDefaultUser();
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
+        //1
+        HTTPUtils.POSTUser(defaultUser);
 
-            in.close();
-            System.out.println(response);
+        //2
+        HTTPUtils.PUTUser(defaultUser);
 
+        //3
+        HTTPUtils.DELETEUser(defaultUser);
 
+        //4
+        System.out.println(HTTPUtils.GETAllUsers());
 
-        }
+        //5
+        System.out.println(HTTPUtils.GETUserById(1));
+
+        //6
+        System.out.println(HTTPUtils.GETUserByUsername("Bret"));
     }
 }
