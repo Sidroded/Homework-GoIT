@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.homework.module13.model.Post;
+import org.homework.module13.model.Todo;
 import org.homework.module13.model.user.Address;
 import org.homework.module13.model.user.Company;
 import org.homework.module13.model.user.Geo;
@@ -140,5 +141,20 @@ public class HTTPUtils {
         HttpResponse<String> responseComment = CLIENT.send(requestComment, HttpResponse.BodyHandlers.ofString());
 
         TaskUtils.writeToJsonFile(responseComment.body(), userId, lastPostId);
+    }
+
+    public static void GETOpenTodosForUser(int userId) throws IOException, InterruptedException {
+        Gson gson = new GsonBuilder().create();
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create(String.format("%s/%d/todos", LINK_USERS, userId)))
+                .header("Content-Type", "application/json")
+                .build();
+
+        HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+        List<Todo> todos = gson.fromJson(response.body(), new TypeToken<List<Todo>>(){}.getType());
+        todos.stream()
+                .filter(todo -> !todo.isCompleted())
+                .forEach(System.out :: println);
     }
 }
