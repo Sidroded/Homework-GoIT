@@ -8,16 +8,16 @@ import java.io.IOException;
 
 public class MainTaskOne {
     public static void main(String[] args) throws IOException, InterruptedException {
-        User defaultUser = TaskUtils.getDefaultUser();
+        User user = TaskUtils.getDefaultUser();
 
         //1
-        HTTPUtils.POSTUser(defaultUser);
+        HTTPUtils.POSTUser(user);
 
         //2
-        HTTPUtils.PUTUser(defaultUser);
+        HTTPUtils.PUTUser(user);
 
         //3
-        HTTPUtils.DELETEUser(defaultUser);
+        HTTPUtils.DELETEUser(user);
 
         //4
         System.out.println(HTTPUtils.GETAllUsers());

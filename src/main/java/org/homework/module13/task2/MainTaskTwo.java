@@ -9,8 +9,7 @@ import java.io.IOException;
 public class MainTaskTwo {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        User defaultUser = TaskUtils.getDefaultUser();
-        HTTPUtils.GETAllCommentsFromLastPostOfUser(defaultUser);
-
+        User user = TaskUtils.getDefaultUser();
+        HTTPUtils.GETAllCommentsFromLastPostOfUser(user);
     }
 }

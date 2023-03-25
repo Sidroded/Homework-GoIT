@@ -5,9 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.homework.module13.model.Post;
 import org.homework.module13.model.Todo;
-import org.homework.module13.model.user.Address;
-import org.homework.module13.model.user.Company;
-import org.homework.module13.model.user.Geo;
 import org.homework.module13.model.user.User;
 
 import java.io.BufferedReader;
