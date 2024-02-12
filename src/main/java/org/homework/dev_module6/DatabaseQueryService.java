@@ -1,6 +1,6 @@
-package org.homework.dev_module4;
+package org.homework.dev_module6;
 
-import org.homework.dev_module4.entity.*;
+import org.homework.dev_module6.entity.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class DatabaseQueryService {
     private static final String findLongestProjectPath = "sql/find_longest_project.sql";

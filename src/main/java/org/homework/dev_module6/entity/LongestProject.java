@@ -1,4 +1,4 @@
-package org.homework.dev_module4.entity;
+package org.homework.dev_module6.entity;
 
 public class LongestProject {
     private int ID;

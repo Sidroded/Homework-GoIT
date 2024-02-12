@@ -1,4 +1,4 @@
-package org.homework.dev_module4;
+package org.homework.dev_module6;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
