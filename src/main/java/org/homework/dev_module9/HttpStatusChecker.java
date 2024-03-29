@@ -2,7 +2,6 @@ package org.homework.dev_module9;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HttpStatusChecker {
